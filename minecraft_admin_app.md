@@ -1,0 +1,482 @@
+import React, { useState } from 'react';
+import { Send, Shield, User, Mail, MessageSquare, Gamepad2, Monitor, MapPin, Clock, Award, AlertTriangle, Ban, Flag } from 'lucide-react';
+
+export default function AdminApplication() {
+  const [formData, setFormData] = useState({
+    discordName: '',
+    minecraftName: '',
+    email: '',
+    age: '',
+    country: '',
+    city: '',
+    accountType: '',
+    processor: '',
+    ram: '',
+    gpu: '',
+    os: '',
+    dailyHours: '',
+    benefits: '',
+    position: '',
+    reason: '',
+    uniqueness: '',
+    staffMember: '',
+    hackerAction: '',
+    xrayAction: '',
+    chatAbuse: '',
+    suspiciousLink: '',
+    adminInsult: '',
+    adminAbuse: '',
+    advertising: '',
+    ticketResponse: '',
+    quickResponse: '',
+    patrol: ''
+  });
+
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
+
+  const handleChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value
+    });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+
+    const emailBody = `
+═══════════════════════════════════════
+    🎮 تقديم إدارة جديد - ZAKI-ZEX 🎮
+═══════════════════════════════════════
+
+📝 المعلومات الشخصية:
+━━━━━━━━━━━━━━━━━━━━━━━━
+👤 اسم الديسكورد: ${formData.discordName}
+🎮 اسم ماين كرافت: ${formData.minecraftName}
+📧 الإيميل: ${formData.email}
+🎂 العمر: ${formData.age}
+🌍 البلد: ${formData.country}
+📍 المدينة/الولاية: ${formData.city}
+
+💻 المعلومات التقنية:
+━━━━━━━━━━━━━━━━━━━━━━━━
+🎯 نوع الحساب: ${formData.accountType}
+⚙️ المعالج: ${formData.processor}
+🧠 الرام: ${formData.ram}
+🎨 كرت الشاشة: ${formData.gpu}
+💿 نظام التشغيل: ${formData.os}
+⏰ ساعات الاتصال اليومية: ${formData.dailyHours}
+
+🎯 معلومات التقديم:
+━━━━━━━━━━━━━━━━━━━━━━━━
+💡 كيف سيفيد السيرفر: ${formData.benefits}
+🎖️ المنصب المطلوب: ${formData.position}
+❓ سبب التقديم: ${formData.reason}
+⭐ ما يميزه عن الآخرين: ${formData.uniqueness}
+✅ قبول رتبة StaffMember: ${formData.staffMember}
+
+🛡️ التعامل مع المخالفات:
+━━━━━━━━━━━━━━━━━━━━━━━━
+🚫 التعامل مع الهكر: ${formData.hackerAction}
+👁️ التعامل مع X-Ray: ${formData.xrayAction}
+💬 التعامل مع السب: ${formData.chatAbuse}
+🔗 التعامل مع روابط مشبوهة: ${formData.suspiciousLink}
+😡 التعامل مع شتم الأدمن: ${formData.adminInsult}
+⚠️ التعامل مع أدمن مخالف: ${formData.adminAbuse}
+📢 التعامل مع الإعلانات: ${formData.advertising}
+
+💬 التواصل والمسؤولية:
+━━━━━━━━━━━━━━━━━━━━━━━━
+🎫 الرد على التكتات: ${formData.ticketResponse}
+⚡ سرعة الرد: ${formData.quickResponse}
+👀 الدورية على اللاعبين: ${formData.patrol}
+
+═══════════════════════════════════════
+    تاريخ التقديم: ${new Date().toLocaleString('ar-SA')}
+═══════════════════════════════════════
+    `;
+
+    try {
+      const response = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          access_key: '9c0f9c8e-8f9e-4b9e-9f9e-8f9e9f9e9f9e',
+          subject: `🎮 تقديم إدارة جديد من ${formData.discordName} - ZAKI-ZEX`,
+          from_name: 'ZAKI-ZEX Server',
+          to_email: 'BelabbasZakaria777@gmail.com',
+          message: emailBody
+        })
+      });
+
+      setTimeout(() => {
+        setIsSubmitting(false);
+        setSubmitted(true);
+      }, 2000);
+    } catch (error) {
+      console.error('Error:', error);
+      setIsSubmitting(false);
+      alert('حدث خطأ في الإرسال. يرجى المحاولة مرة أخرى.');
+    }
+  };
+
+  if (submitted) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-purple-900 via-blue-900 to-indigo-900 flex items-center justify-center p-4">
+        <div className="bg-gradient-to-br from-green-500 to-emerald-600 rounded-3xl p-12 text-center shadow-2xl max-w-2xl animate-pulse">
+          <Shield className="w-32 h-32 mx-auto text-white mb-6" />
+          <h2 className="text-5xl font-black text-white mb-4">🎉 تم الإرسال بنجاح! 🎉</h2>
+          <p className="text-2xl text-white mb-6">تقديمك وصل للإدارة بنجاح!</p>
+          <p className="text-xl text-white/90 mb-8">افتح تكت في الديسكورد وقول "قدمت" عشان نشوف تقديمك 🚀</p>
+          <button 
+            onClick={() => window.location.reload()}
+            className="bg-white text-green-600 px-8 py-4 rounded-xl font-bold text-lg hover:scale-105 transition-transform"
+          >
+            تقديم جديد
+          </button>
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-purple-900 via-blue-900 to-indigo-900 py-12 px-4">
+      <div className="max-w-5xl mx-auto">
+        {/* Header */}
+        <div className="text-center mb-12 animate-fade-in">
+          <div className="relative inline-block mb-6">
+            <Shield className="w-24 h-24 text-yellow-400 mx-auto drop-shadow-2xl animate-bounce" />
+            <div className="absolute -top-2 -right-2 w-8 h-8 bg-red-500 rounded-full animate-ping"></div>
+          </div>
+          <h1 className="text-6xl font-black text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 via-pink-500 to-purple-500 mb-4 drop-shadow-lg">
+            ZAKI-ZEX
+          </h1>
+          <p className="text-3xl font-bold text-white mb-2">🎮 نموذج تقديم الإدارة 🎮</p>
+          <p className="text-xl text-blue-200">املأ النموذج بدقة واحترافية</p>
+        </div>
+
+        <form onSubmit={handleSubmit} className="space-y-8">
+          {/* Personal Info Section */}
+          <div className="bg-gradient-to-br from-indigo-800 to-purple-800 rounded-3xl p-8 shadow-2xl border-4 border-yellow-400">
+            <h2 className="text-3xl font-black text-yellow-400 mb-6 flex items-center gap-3">
+              <User className="w-8 h-8" />
+              المعلومات الشخصية
+            </h2>
+            <div className="grid md:grid-cols-2 gap-6">
+              <div>
+                <label className="block text-white font-bold mb-2 text-lg">👤 اسمك في الديسكورد *</label>
+                <input
+                  type="text"
+                  name="discordName"
+                  required
+                  value={formData.discordName}
+                  onChange={handleChange}
+                  className="w-full px-4 py-3 rounded-xl bg-white/10 border-2 border-white/30 text-white placeholder-white/50 focus:border-yellow-400 focus:outline-none text-lg"
+                  placeholder="Username#1234"
+                />
+              </div>
+              <div>
+                <label className="block text-white font-bold mb-2 text-lg">🎮 اسمك في ماين كرافت *</label>
+                <input
+                  type="text"
+                  name="minecraftName"
+                  required
+                  value={formData.minecraftName}
+                  onChange={handleChange}
+                  className="w-full px-4 py-3 rounded-xl bg-white/10 border-2 border-white/30 text-white placeholder-white/50 focus:border-yellow-400 focus:outline-none text-lg"
+                  placeholder="PlayerName"
+                />
+              </div>
+              <div>
+                <label className="block text-white font-bold mb-2 text-lg">📧 الإيميل *</label>
+                <input
+                  type="email"
+                  name="email"
+                  required
+                  value={formData.email}
+                  onChange={handleChange}
+                  className="w-full px-4 py-3 rounded-xl bg-white/10 border-2 border-white/30 text-white placeholder-white/50 focus:border-yellow-400 focus:outline-none text-lg"
+                  placeholder="example@email.com"
+                />
+              </div>
+              <div>
+                <label className="block text-white font-bold mb-2 text-lg">🎂 العمر *</label>
+                <input
+                  type="number"
+                  name="age"
+                  required
+                  value={formData.age}
+                  onChange={handleChange}
+                  className="w-full px-4 py-3 rounded-xl bg-white/10 border-2 border-white/30 text-white placeholder-white/50 focus:border-yellow-400 focus:outline-none text-lg"
+                  placeholder="18"
+                />
+              </div>
+              <div>
+                <label className="block text-white font-bold mb-2 text-lg">🌍 من وين انت *</label>
+                <input
+                  type="text"
+                  name="country"
+                  required
+                  value={formData.country}
+                  onChange={handleChange}
+                  className="w-full px-4 py-3 rounded-xl bg-white/10 border-2 border-white/30 text-white placeholder-white/50 focus:border-yellow-400 focus:outline-none text-lg"
+                  placeholder="البلد"
+                />
+              </div>
+              <div>
+                <label className="block text-white font-bold mb-2 text-lg">📍 الولاية/المدينة *</label>
+                <input
+                  type="text"
+                  name="city"
+                  required
+                  value={formData.city}
+                  onChange={handleChange}
+                  className="w-full px-4 py-3 rounded-xl bg-white/10 border-2 border-white/30 text-white placeholder-white/50 focus:border-yellow-400 focus:outline-none text-lg"
+                  placeholder="المدينة"
+                />
+              </div>
+            </div>
+          </div>
+
+          {/* Technical Info Section */}
+          <div className="bg-gradient-to-br from-blue-800 to-cyan-800 rounded-3xl p-8 shadow-2xl border-4 border-cyan-400">
+            <h2 className="text-3xl font-black text-cyan-400 mb-6 flex items-center gap-3">
+              <Monitor className="w-8 h-8" />
+              المعلومات التقنية
+            </h2>
+            <div className="grid md:grid-cols-2 gap-6">
+              <div>
+                <label className="block text-white font-bold mb-2 text-lg">🎯 حسابك مكرك أو أصلي؟ *</label>
+                <select
+                  name="accountType"
+                  required
+                  value={formData.accountType}
+                  onChange={handleChange}
+                  className="w-full px-4 py-3 rounded-xl bg-white/10 border-2 border-white/30 text-white focus:border-cyan-400 focus:outline-none text-lg"
+                >
+                  <option value="" className="bg-gray-800">اختر...</option>
+                  <option value="أصلي" className="bg-gray-800">أصلي ✅</option>
+                  <option value="مكرك" className="bg-gray-800">مكرك</option>
+                </select>
+              </div>
+              <div>
+                <label className="block text-white font-bold mb-2 text-lg">⏰ كم ساعة باليوم؟ *</label>
+                <input
+                  type="text"
+                  name="dailyHours"
+                  required
+                  value={formData.dailyHours}
+                  onChange={handleChange}
+                  className="w-full px-4 py-3 rounded-xl bg-white/10 border-2 border-white/30 text-white placeholder-white/50 focus:border-cyan-400 focus:outline-none text-lg"
+                  placeholder="مثال: 4-6 ساعات"
+                />
+              </div>
+              <div>
+                <label className="block text-white font-bold mb-2 text-lg">⚙️ المعالج *</label>
+                <input
+                  type="text"
+                  name="processor"
+                  required
+                  value={formData.processor}
+                  onChange={handleChange}
+                  className="w-full px-4 py-3 rounded-xl bg-white/10 border-2 border-white/30 text-white placeholder-white/50 focus:border-cyan-400 focus:outline-none text-lg"
+                  placeholder="Intel i7"
+                />
+              </div>
+              <div>
+                <label className="block text-white font-bold mb-2 text-lg">🧠 الرام *</label>
+                <input
+                  type="text"
+                  name="ram"
+                  required
+                  value={formData.ram}
+                  onChange={handleChange}
+                  className="w-full px-4 py-3 rounded-xl bg-white/10 border-2 border-white/30 text-white placeholder-white/50 focus:border-cyan-400 focus:outline-none text-lg"
+                  placeholder="16GB"
+                />
+              </div>
+              <div>
+                <label className="block text-white font-bold mb-2 text-lg">🎨 كرت الشاشة *</label>
+                <input
+                  type="text"
+                  name="gpu"
+                  required
+                  value={formData.gpu}
+                  onChange={handleChange}
+                  className="w-full px-4 py-3 rounded-xl bg-white/10 border-2 border-white/30 text-white placeholder-white/50 focus:border-cyan-400 focus:outline-none text-lg"
+                  placeholder="GTX 1660"
+                />
+              </div>
+              <div>
+                <label className="block text-white font-bold mb-2 text-lg">💿 نظام التشغيل *</label>
+                <input
+                  type="text"
+                  name="os"
+                  required
+                  value={formData.os}
+                  onChange={handleChange}
+                  className="w-full px-4 py-3 rounded-xl bg-white/10 border-2 border-white/30 text-white placeholder-white/50 focus:border-cyan-400 focus:outline-none text-lg"
+                  placeholder="Windows 11"
+                />
+              </div>
+            </div>
+          </div>
+
+          {/* Application Questions */}
+          <div className="bg-gradient-to-br from-pink-800 to-rose-800 rounded-3xl p-8 shadow-2xl border-4 border-pink-400">
+            <h2 className="text-3xl font-black text-pink-400 mb-6 flex items-center gap-3">
+              <Award className="w-8 h-8" />
+              أسئلة التقديم
+            </h2>
+            <div className="space-y-6">
+              <div>
+                <label className="block text-white font-bold mb-2 text-lg">💡 شو بتفيدنا لو وظفناك؟ *</label>
+                <textarea
+                  name="benefits"
+                  required
+                  value={formData.benefits}
+                  onChange={handleChange}
+                  rows="4"
+                  className="w-full px-4 py-3 rounded-xl bg-white/10 border-2 border-white/30 text-white placeholder-white/50 focus:border-pink-400 focus:outline-none text-lg"
+                  placeholder="اشرح مهاراتك وخبراتك..."
+                ></textarea>
+              </div>
+              <div>
+                <label className="block text-white font-bold mb-2 text-lg">🎖️ ماين كرافت أو ديسكورد؟ *</label>
+                <select
+                  name="position"
+                  required
+                  value={formData.position}
+                  onChange={handleChange}
+                  className="w-full px-4 py-3 rounded-xl bg-white/10 border-2 border-white/30 text-white focus:border-pink-400 focus:outline-none text-lg"
+                >
+                  <option value="" className="bg-gray-800">اختر...</option>
+                  <option value="ماين كرافت" className="bg-gray-800">ماين كرافت 🎮</option>
+                  <option value="ديسكورد" className="bg-gray-800">ديسكورد 💬</option>
+                </select>
+              </div>
+              <div>
+                <label className="block text-white font-bold mb-2 text-lg">❓ ليش تبي تكون أدمن؟ *</label>
+                <textarea
+                  name="reason"
+                  required
+                  value={formData.reason}
+                  onChange={handleChange}
+                  rows="4"
+                  className="w-full px-4 py-3 rounded-xl bg-white/10 border-2 border-white/30 text-white placeholder-white/50 focus:border-pink-400 focus:outline-none text-lg"
+                  placeholder="اكتب السبب..."
+                ></textarea>
+              </div>
+              <div>
+                <label className="block text-white font-bold mb-2 text-lg">⭐ شو بيفرقك عن الأدمنز الثانيين؟ *</label>
+                <textarea
+                  name="uniqueness"
+                  required
+                  value={formData.uniqueness}
+                  onChange={handleChange}
+                  rows="4"
+                  className="w-full px-4 py-3 rounded-xl bg-white/10 border-2 border-white/30 text-white placeholder-white/50 focus:border-pink-400 focus:outline-none text-lg"
+                  placeholder="ما يميزك..."
+                ></textarea>
+              </div>
+              <div>
+                <label className="block text-white font-bold mb-2 text-lg">✅ هل بترضى برتبة StaffMember؟ *</label>
+                <select
+                  name="staffMember"
+                  required
+                  value={formData.staffMember}
+                  onChange={handleChange}
+                  className="w-full px-4 py-3 rounded-xl bg-white/10 border-2 border-white/30 text-white focus:border-pink-400 focus:outline-none text-lg"
+                >
+                  <option value="" className="bg-gray-800">اختر...</option>
+                  <option value="نعم" className="bg-gray-800">نعم ✅</option>
+                  <option value="لا" className="bg-gray-800">لا ❌</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          {/* Scenarios Section */}
+          <div className="bg-gradient-to-br from-red-800 to-orange-800 rounded-3xl p-8 shadow-2xl border-4 border-red-400">
+            <h2 className="text-3xl font-black text-red-400 mb-6 flex items-center gap-3">
+              <AlertTriangle className="w-8 h-8" />
+              سيناريوهات الإدارة
+            </h2>
+            <div className="space-y-6">
+              <div>
+                <label className="block text-white font-bold mb-2 text-lg">🚫 شو بتساوي لو لقيت هكر؟ *</label>
+                <textarea
+                  name="hackerAction"
+                  required
+                  value={formData.hackerAction}
+                  onChange={handleChange}
+                  rows="3"
+                  className="w-full px-4 py-3 rounded-xl bg-white/10 border-2 border-white/30 text-white placeholder-white/50 focus:border-red-400 focus:outline-none text-lg"
+                  placeholder="اكتب إجابتك..."
+                ></textarea>
+              </div>
+              <div>
+                <label className="block text-white font-bold mb-2 text-lg">👁️ شو بتساوي لو لقيت xray؟ *</label>
+                <textarea
+                  name="xrayAction"
+                  required
+                  value={formData.xrayAction}
+                  onChange={handleChange}
+                  rows="3"
+                  className="w-full px-4 py-3 rounded-xl bg-white/10 border-2 border-white/30 text-white placeholder-white/50 focus:border-red-400 focus:outline-none text-lg"
+                  placeholder="اكتب إجابتك..."
+                ></textarea>
+              </div>
+              <div>
+                <label className="block text-white font-bold mb-2 text-lg">💬 شو بتساوي لو حد سب بالشات؟ *</label>
+                <textarea
+                  name="chatAbuse"
+                  required
+                  value={formData.chatAbuse}
+                  onChange={handleChange}
+                  rows="3"
+                  className="w-full px-4 py-3 rounded-xl bg-white/10 border-2 border-white/30 text-white placeholder-white/50 focus:border-red-400 focus:outline-none text-lg"
+                  placeholder="اكتب إجابتك..."
+                ></textarea>
+              </div>
+              <div>
+                <label className="block text-white font-bold mb-2 text-lg">🔗 شو بتساوي لو حد عطى رابط مشبوه؟ *</label>
+                <textarea
+                  name="suspiciousLink"
+                  required
+                  value={formData.suspiciousLink}
+                  onChange={handleChange}
+                  rows="3"
+                  className="w-full px-4 py-3 rounded-xl bg-white/10 border-2 border-white/30 text-white placeholder-white/50 focus:border-red-400 focus:outline-none text-lg"
+                  placeholder="اكتب إجابتك..."
+                ></textarea>
+              </div>
+              <div>
+                <label className="block text-white font-bold mb-2 text-lg">😡 شو بتساوي لو حد شتم الأدمن؟ *</label>
+                <textarea
+                  name="adminInsult"
+                  required
+                  value={formData.adminInsult}
+                  onChange={handleChange}
+                  rows="3"
+                  className="w-full px-4 py-3 rounded-xl bg-white/10 border-2 border-white/30 text-white placeholder-white/50 focus:border-red-400 focus:outline-none text-lg"
+                  placeholder="اكتب إجابتك..."
+                ></textarea>
+              </div>
+              <div>
+                <label className="block text-white font-bold mb-2 text-lg">⚠️ شو بتساوي لو أدمن يستخدم صلاحياته لصالحه؟ *</label>
+                <textarea
+                  name="adminAbuse"
+                  required
+                  value={formData.adminAbuse}
+                  onChange={handleChange}
+                  rows="3"
+                  className="w-full px-4 py-3 rounded-xl bg-white/10 border-2 border-white/30 text-white placeholder-white/50 focus:border-red-400 focus:outline-none text-lg"
+                  placeholder="اكتب إجابتك..."
+                ></textarea>
+              </div>
+              
